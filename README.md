@@ -1,64 +1,48 @@
-# Event Ticket Scraper (Ticketmaster)
+# 🎫 Event Ticket Scraper (Ticketmaster)
 
-Search concerts, sports games, theater shows, and live events via the **Ticketmaster Discovery API**. Get event details, ticket prices, venue info, presale dates, seat maps, and direct ticket links as clean JSON.
+> **The most comprehensive, reliable event ticket scraper for Apify — powered by the official Ticketmaster Discovery API**
 
-Works as a standalone scraper **and** as an MCP tool for AI agents.
+## 🌟 Why Choose This Scraper?
 
-## What data can you extract?
+The Event Ticket Scraper delivers production-ready event search capabilities with these advanced features:
 
-| Field | Example |
-|-------|---------|
-| Event name | "Taylor Swift \| The Eras Tour" |
-| Date & time | 2025-08-15, 19:00:00, America/New_York |
-| Ticket status | onsale, offsale, canceled, postponed, rescheduled |
-| Price range | $49.50 - $449.50 USD |
-| Venue | Madison Square Garden, New York, NY |
-| Venue coordinates | 40.7505, -73.9934 |
-| Artists/attractions | ["Taylor Swift"] |
-| Classification | Music > Pop > Pop Rock |
-| Public sale window | 2025-01-15T10:00:00Z - 2025-08-15T18:00:00Z |
-| Presales | Verified Fan, Citi Cardmember, VIP packages |
-| Ticket URL | Direct link to buy tickets |
-| Seat map | Static seat map image URL |
-| Event images | Multiple resolutions |
-| Promoter | Live Nation |
+**Comprehensive Event Search**: Search concerts, sports games, theater shows, comedy, festivals, and any live event across Ticketmaster's massive database. Filter by keyword, city, state, country, zip code, geographic coordinates, date range, genre, and more.
 
-## Use cases
+**Real-Time Ticket Pricing**: Get current price ranges (min/max) with currency, ticket status (onsale/offsale/canceled/postponed), public sale windows, and presale details — all from Ticketmaster's official API.
 
-- **Price monitoring** -- Track ticket price ranges for events over time
-- **Event discovery** -- Find upcoming concerts, sports, theater in any city
-- **Market research** -- Analyze event pricing across venues, genres, or regions
-- **Alerting** -- Monitor presale dates and on-sale windows for hot events
-- **Venue analysis** -- Research venue details, capacity, and upcoming event counts
-- **AI agents** -- Feed event data into LLM pipelines via MCP integration
+**Rich Venue & Artist Data**: Every event includes full venue details (name, address, city, state, country, GPS coordinates, timezone), artist/attraction names, event classifications (segment > genre > sub-genre), promoter info, seat maps, and high-res images.
 
-## Modes
+**Multiple Search Modes**: Search events by keyword, look up a specific event by ID, or search venues independently. Three modes, one actor.
 
-### 1. Search events (default)
+**Free API Key**: Uses Ticketmaster's free Discovery API (5000 calls/day, 5 req/sec). No paid API subscription required — just register at developer.ticketmaster.com.
 
-Search events by keyword, location, date range, classification, and more. Returns up to 1000 results per search (Ticketmaster API deep paging limit).
+**Enterprise-Grade Reliability**: Built-in rate limiting, exponential backoff on 429 responses, configurable request intervals, batch dataset push, and Apify state persistence for resumable runs.
 
-### 2. Get event by ID
+## 🚀 Features
 
-Look up a specific event by its Ticketmaster event ID for full details including pricing, presales, and seat map.
+### Core Capabilities
 
-### 3. Search venues
+- **Three Search Modes**: Event search, event lookup by ID, and venue search
+- **Powerful Filters**: Keyword, city, state, country, postal code, lat/long radius, date range, genre/classification, source platform, family-friendly
+- **Geo Search**: Search events within a radius of any GPS coordinate or postal code
+- **Flexible Sorting**: By relevance, date (soonest/latest), name (A-Z/Z-A), or distance (nearest first)
+- **Deep Pagination**: Automatic pagination up to Ticketmaster's 1000-result limit per search
+- **Global Coverage**: US, Canada, UK, Mexico, and select European markets
 
-Search venues by keyword and location. Returns venue details including address, coordinates, parking info, and upcoming event count.
+### Data Quality
 
-## API key (free)
+- **Ticket Pricing**: Min/max price ranges with currency for every event
+- **Presale Intel**: Presale names, date windows, and descriptions (Verified Fan, Citi Cardmember, VIP, etc.)
+- **Venue Details**: Full address, city, state, country, postal code, GPS coordinates, and timezone
+- **Classification Hierarchy**: Segment > Genre > Sub-Genre (e.g. Music > Rock > Alternative Rock)
+- **Rich Media**: Seat map images, event images in multiple resolutions
+- **Direct Links**: Ticket purchase URLs for every event
 
-This actor requires a **free** Ticketmaster Discovery API key:
+## 📖 Usage Examples
 
-1. Go to [developer.ticketmaster.com](https://developer.ticketmaster.com/)
-2. Create a free account
-3. Your API key is on the dashboard
+### Example 1: Concert Search in New York
 
-Rate limits: 5000 calls/day, 5 requests/second. More than enough for typical use.
-
-## Input examples
-
-### Search for concerts in New York
+Search for Taylor Swift concerts in New York City.
 
 ```json
 {
@@ -73,7 +57,9 @@ Rate limits: 5000 calls/day, 5 requests/second. More than enough for typical use
 }
 ```
 
-### Find NBA games this month
+### Example 2: Sports Events with Date Range
+
+Find NBA games happening in June, sorted by date.
 
 ```json
 {
@@ -88,29 +74,9 @@ Rate limits: 5000 calls/day, 5 requests/second. More than enough for typical use
 }
 ```
 
-### Look up a specific event
+### Example 3: Geo Search — Events Near Me
 
-```json
-{
-    "apiKey": "YOUR_API_KEY",
-    "mode": "get_event",
-    "eventId": "vvG1iZ4JFSmpkV"
-}
-```
-
-### Search venues in Los Angeles
-
-```json
-{
-    "apiKey": "YOUR_API_KEY",
-    "mode": "venues",
-    "keyword": "arena",
-    "city": "Los Angeles",
-    "stateCode": "CA"
-}
-```
-
-### Events near a location (geo search)
+Find music events within 25 miles of Manhattan.
 
 ```json
 {
@@ -125,9 +91,78 @@ Rate limits: 5000 calls/day, 5 requests/second. More than enough for typical use
 }
 ```
 
-## Output example
+### Example 4: Look Up a Specific Event
 
-Each event is one dataset item:
+Get full details for a known Ticketmaster event ID.
+
+```json
+{
+    "apiKey": "YOUR_API_KEY",
+    "mode": "get_event",
+    "eventId": "vvG1iZ4JFSmpkV"
+}
+```
+
+### Example 5: Venue Search
+
+Search for arenas in Los Angeles.
+
+```json
+{
+    "apiKey": "YOUR_API_KEY",
+    "mode": "venues",
+    "keyword": "arena",
+    "city": "Los Angeles",
+    "stateCode": "CA"
+}
+```
+
+### Example 6: Comedy Shows — Family-Friendly Only
+
+Find family-friendly comedy shows in Chicago.
+
+```json
+{
+    "apiKey": "YOUR_API_KEY",
+    "mode": "search",
+    "classificationName": "Comedy",
+    "city": "Chicago",
+    "stateCode": "IL",
+    "includeFamily": "yes",
+    "sort": "date,asc",
+    "maxResults": 25
+}
+```
+
+## 🔍 Input Parameters
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `apiKey` | `string` | ✅ | - | Ticketmaster Discovery API key. Get one for free at [developer.ticketmaster.com](https://developer.ticketmaster.com/) |
+| `mode` | `string` | ❌ | `"search"` | Operation mode: `search`, `get_event`, or `venues` |
+| `keyword` | `string` | ❌ | - | Search term — artist, event name, team, or genre (e.g. `"Taylor Swift"`, `"NBA"`, `"comedy"`) |
+| `eventId` | `string` | ❌ | - | Ticketmaster event ID for `get_event` mode (e.g. `"vvG1iZ4JFSmpkV"`) |
+| `city` | `string` | ❌ | - | Filter by city name (e.g. `"New York"`, `"Los Angeles"`) |
+| `stateCode` | `string` | ❌ | - | State/province code (e.g. `"NY"`, `"CA"`, `"ON"`) |
+| `countryCode` | `string` | ❌ | - | ISO Alpha-2 country code (e.g. `"US"`, `"CA"`, `"GB"`) |
+| `postalCode` | `string` | ❌ | - | Postal/zip code (e.g. `"10001"`) |
+| `latlong` | `string` | ❌ | - | Geographic center point as `"lat,long"` (e.g. `"40.7128,-74.0060"`). Use with `radius` |
+| `radius` | `integer` | ❌ | - | Search radius from center point, in miles or km (1–500) |
+| `unit` | `string` | ❌ | `"miles"` | Radius unit: `miles` or `km` |
+| `classificationName` | `string` | ❌ | - | Event type/genre: `"Music"`, `"Sports"`, `"Arts & Theatre"`, `"Comedy"`, `"Rock"`, `"Pop"`, `"NBA"`, `"NFL"`, etc. |
+| `startDateTime` | `string` | ❌ | - | Events starting on or after this date. ISO 8601 format: `"YYYY-MM-DDTHH:mm:ssZ"` |
+| `endDateTime` | `string` | ❌ | - | Events starting on or before this date. ISO 8601 format: `"YYYY-MM-DDTHH:mm:ssZ"` |
+| `sort` | `string` | ❌ | `"relevance,desc"` | Sort order: `relevance,desc`, `date,asc`, `date,desc`, `name,asc`, `name,desc`, `distance,asc` |
+| `source` | `string` | ❌ | - | Filter by source: `ticketmaster`, `universe`, `frontgate`, `tmr` |
+| `includeFamily` | `string` | ❌ | - | Family-friendly filter: `"yes"` or `"no"` |
+| `maxResults` | `integer` | ❌ | `100` | Maximum number of results (1–1000). Free tier users: 25 per run |
+| `requestIntervalSecs` | `number` | ❌ | `0.5` | Minimum seconds between API requests (0.2–5.0) |
+
+## 📊 Output Format
+
+### Event Output
+
+Each event is pushed as a separate dataset item with the following structure:
 
 ```json
 {
@@ -180,45 +215,45 @@ Each event is one dataset item:
 }
 ```
 
-## Input parameters
+### Output Fields
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `apiKey` | string | *required* | Ticketmaster Discovery API key (free) |
-| `mode` | string | `"search"` | `search`, `get_event`, or `venues` |
-| `keyword` | string | | Search term (artist, event, team, genre) |
-| `eventId` | string | | Event ID for `get_event` mode |
-| `city` | string | | Filter by city |
-| `stateCode` | string | | State/province code (e.g. `NY`, `CA`) |
-| `countryCode` | string | | Country code (e.g. `US`, `GB`, `CA`) |
-| `postalCode` | string | | Postal/zip code |
-| `latlong` | string | | Lat,long for geo search (e.g. `40.7128,-74.0060`) |
-| `radius` | integer | | Search radius (use with `latlong` or `postalCode`) |
-| `unit` | string | `"miles"` | Radius unit: `miles` or `km` |
-| `classificationName` | string | | Event type: `Music`, `Sports`, `Arts & Theatre`, etc. |
-| `startDateTime` | string | | Events after this date (ISO 8601 with Z) |
-| `endDateTime` | string | | Events before this date (ISO 8601 with Z) |
-| `sort` | string | `"relevance,desc"` | Sort order |
-| `source` | string | | Filter by source platform |
-| `includeFamily` | string | | Family-friendly filter: `yes` or `no` |
-| `maxResults` | integer | `100` | Max results (1-1000). Free tier: 25 |
-| `requestIntervalSecs` | number | `0.5` | Seconds between API requests |
+- **`event_name`** / **`event_id`** / **`event_url`**: Core event identification and direct ticket link
+- **`local_date`** / **`local_time`** / **`datetime_utc`** / **`timezone`**: Complete date/time information
+- **`status`**: Current ticket status — `onsale`, `offsale`, `canceled`, `postponed`, `rescheduled`
+- **`price_min`** / **`price_max`** / **`price_currency`**: Ticket price range
+- **`venue_*`**: Full venue details including GPS coordinates
+- **`attractions`**: Artist/team names associated with the event
+- **`segment`** / **`genre`** / **`sub_genre`**: Event classification hierarchy
+- **`presales`**: Array of presale windows with names, dates, and descriptions
+- **`seatmap_url`** / **`images`**: Visual assets for the event
 
-## Limitations
+## 🔑 API Key Setup
 
-- **Deep paging**: Ticketmaster limits results to ~1000 per search query. Use filters to narrow results.
-- **Price ranges**: The API provides price ranges (min/max), not individual seat prices.
-- **Availability**: The API does not provide real-time seat-level availability.
-- **Rate limits**: 5000 API calls/day, 5 requests/second (free tier API key).
-- **Geography**: Best coverage for US, Canada, UK, and select European markets.
+This actor requires a **free** Ticketmaster Discovery API key:
 
-## Cost
+1. Go to [developer.ticketmaster.com](https://developer.ticketmaster.com/)
+2. Create a free account
+3. Copy your **Consumer Key** from the dashboard — that's your API key
 
-This actor uses **pay-per-event** pricing at **$0.0005 per event** (that's $0.50 per 1000 events).
+Rate limits: **5,000 calls/day** and **5 requests/second**. More than enough for typical use.
+
+## 💰 Pricing
+
+This Actor uses a **pay-per-event** pricing model at **$0.0005 per result** (that's $0.50 per 1,000 events).
 
 Free tier users get **25 results per run** at no cost.
 
-## MCP integration
+## 🎯 Use Cases
+
+- **Price Monitoring**: Track ticket price ranges for specific events, artists, or venues over time
+- **Event Discovery**: Find upcoming concerts, sports games, theater shows, and festivals in any city or region
+- **Market Research**: Analyze event pricing trends across venues, genres, regions, or time periods
+- **Presale Alerting**: Monitor presale dates and on-sale windows for high-demand events
+- **Venue Intelligence**: Research venue details, locations, and upcoming event counts
+- **Travel Planning**: Build event-aware travel recommendation systems
+- **AI Agents**: Feed real-time event and ticket data into LLM pipelines via MCP integration
+
+## 🤖 MCP Integration
 
 Use this actor as a tool in your AI agent pipeline. Add to your MCP client config:
 
@@ -238,11 +273,16 @@ Use this actor as a tool in your AI agent pipeline. Add to your MCP client confi
 
 Then ask your AI: *"Find Taylor Swift concerts in New York with ticket prices"*
 
-## Technical details
+## 📝 Notes
 
-- **No browser needed** -- pure API-based, no Playwright/Puppeteer
-- **Python 3.12** on the `apify/actor-python:3.12` Docker image
-- **Resumable** -- uses Apify state persistence for long runs
-- **Batch push** -- pushes results in batches of 25 for efficiency
-- **Rate limiting** -- built-in rate limiter with configurable interval
-- **Retry logic** -- automatic retry with exponential backoff on 429 responses
+- Uses the **official Ticketmaster Discovery API** — no browser, no Playwright, no bot detection issues
+- Ticketmaster limits deep pagination to **~1,000 results per search query**. Use filters to narrow results
+- Price data is **min/max ranges**, not individual seat prices. Real-time seat-level availability is not provided
+- Best geographic coverage for **US, Canada, UK, Mexico**, and select European markets
+- All dates must be in **ISO 8601 format with timezone** (e.g. `2025-06-01T00:00:00Z`)
+- Results are automatically deduplicated by event ID within a single run
+- The actor supports **Apify state persistence** for resumable long-running searches
+
+**Made with ❤️ for event data enthusiasts**
+
+*Transform your event intelligence with the most reliable Ticketmaster scraper on Apify.*
