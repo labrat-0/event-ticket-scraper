@@ -1,0 +1,73 @@
+{
+    "actorSpecification": 1,
+    "fields": {},
+    "views": {
+        "events": {
+            "title": "Events",
+            "transformation": {
+                "fields": [
+                    "schema_version", "type",
+                    "event_name", "event_id", "event_url",
+                    "local_date", "local_time", "datetime_utc", "timezone",
+                    "status",
+                    "price_min", "price_max", "price_currency",
+                    "venue_name", "venue_city", "venue_state", "venue_country",
+                    "venue_address", "venue_postal_code",
+                    "venue_latitude", "venue_longitude",
+                    "attractions",
+                    "segment", "genre", "sub_genre",
+                    "public_sale_start", "public_sale_end",
+                    "presales",
+                    "promoter",
+                    "seatmap_url",
+                    "images",
+                    "info", "please_note", "ticket_limit",
+                    "accessibility_info",
+                    "source", "scraped_at"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "schema_version": { "label": "Schema", "format": "text" },
+                    "type": { "label": "Type", "format": "text" },
+                    "event_name": { "label": "Event", "format": "text" },
+                    "event_id": { "label": "Event ID", "format": "text" },
+                    "event_url": { "label": "Ticket URL", "format": "link" },
+                    "local_date": { "label": "Date", "format": "text" },
+                    "local_time": { "label": "Time", "format": "text" },
+                    "datetime_utc": { "label": "UTC", "format": "text" },
+                    "timezone": { "label": "Timezone", "format": "text" },
+                    "status": { "label": "Status", "format": "text" },
+                    "price_min": { "label": "Price Min", "format": "number" },
+                    "price_max": { "label": "Price Max", "format": "number" },
+                    "price_currency": { "label": "Currency", "format": "text" },
+                    "venue_name": { "label": "Venue", "format": "text" },
+                    "venue_city": { "label": "City", "format": "text" },
+                    "venue_state": { "label": "State", "format": "text" },
+                    "venue_country": { "label": "Country", "format": "text" },
+                    "venue_address": { "label": "Address", "format": "text" },
+                    "venue_postal_code": { "label": "Postal Code", "format": "text" },
+                    "venue_latitude": { "label": "Latitude", "format": "number" },
+                    "venue_longitude": { "label": "Longitude", "format": "number" },
+                    "attractions": { "label": "Attractions", "format": "text" },
+                    "segment": { "label": "Segment", "format": "text" },
+                    "genre": { "label": "Genre", "format": "text" },
+                    "sub_genre": { "label": "Sub-Genre", "format": "text" },
+                    "public_sale_start": { "label": "Sale Start", "format": "text" },
+                    "public_sale_end": { "label": "Sale End", "format": "text" },
+                    "presales": { "label": "Presales", "format": "text" },
+                    "promoter": { "label": "Promoter", "format": "text" },
+                    "seatmap_url": { "label": "Seat Map", "format": "link" },
+                    "images": { "label": "Images", "format": "text" },
+                    "info": { "label": "Info", "format": "text" },
+                    "please_note": { "label": "Please Note", "format": "text" },
+                    "ticket_limit": { "label": "Ticket Limit", "format": "text" },
+                    "accessibility_info": { "label": "Accessibility", "format": "text" },
+                    "source": { "label": "Source", "format": "text" },
+                    "scraped_at": { "label": "Scraped At", "format": "text" }
+                }
+            }
+        }
+    }
+}

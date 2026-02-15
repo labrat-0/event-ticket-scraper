@@ -1,0 +1,163 @@
+{
+    "title": "Event Ticket Scraper - Input",
+    "description": "Search events, concerts, sports games, and shows via the Ticketmaster Discovery API. Get event details, ticket prices, venue info, presale dates, and direct ticket links. Requires a free Ticketmaster API key.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "apiKey": {
+            "sectionCaption": "API Key",
+            "sectionDescription": "Your Ticketmaster Discovery API key. Get one for free at https://developer.ticketmaster.com/",
+            "title": "Ticketmaster API Key",
+            "type": "string",
+            "description": "Your Ticketmaster Discovery API key. Register for free at developer.ticketmaster.com to get one.",
+            "editor": "textfield",
+            "isSecret": true
+        },
+        "mode": {
+            "sectionCaption": "Search Mode",
+            "sectionDescription": "Choose how to find events. 'search' finds events by keyword and filters. 'get_event' looks up a specific event by Ticketmaster ID. 'venues' searches for venues.",
+            "title": "Mode",
+            "type": "string",
+            "description": "Operation mode: 'search' for keyword/filter search, 'get_event' for lookup by event ID, 'venues' for venue search.",
+            "editor": "select",
+            "enum": ["search", "get_event", "venues"],
+            "enumTitles": ["Search events", "Get event by ID", "Search venues"],
+            "default": "search"
+        },
+        "keyword": {
+            "sectionCaption": "Search Parameters",
+            "sectionDescription": "Provide search terms and location filters to find events.",
+            "title": "Keyword",
+            "type": "string",
+            "description": "Search term -- artist name, event name, team, or genre (e.g. 'Taylor Swift', 'NBA', 'comedy').",
+            "editor": "textfield",
+            "prefill": "Taylor Swift"
+        },
+        "eventId": {
+            "title": "Event ID",
+            "type": "string",
+            "description": "Ticketmaster event ID for 'get_event' mode (e.g. 'vvG1iZ4JFSmpkV').",
+            "editor": "textfield"
+        },
+        "city": {
+            "sectionCaption": "Location Filters",
+            "sectionDescription": "Narrow results by location. You can use city, state, country, postal code, or geographic coordinates.",
+            "title": "City",
+            "type": "string",
+            "description": "Filter by city name (e.g. 'New York', 'Los Angeles').",
+            "editor": "textfield"
+        },
+        "stateCode": {
+            "title": "State/Province Code",
+            "type": "string",
+            "description": "Filter by state or province code (e.g. 'NY', 'CA', 'ON').",
+            "editor": "textfield"
+        },
+        "countryCode": {
+            "title": "Country Code",
+            "type": "string",
+            "description": "Filter by ISO Alpha-2 country code (e.g. 'US', 'CA', 'GB').",
+            "editor": "textfield"
+        },
+        "postalCode": {
+            "title": "Postal Code",
+            "type": "string",
+            "description": "Filter by postal/zip code (e.g. '10001').",
+            "editor": "textfield"
+        },
+        "latlong": {
+            "title": "Latitude,Longitude",
+            "type": "string",
+            "description": "Geographic center point as 'lat,long' (e.g. '40.7128,-74.0060'). Use with radius.",
+            "editor": "textfield"
+        },
+        "radius": {
+            "title": "Radius",
+            "type": "integer",
+            "description": "Search radius from latlong or postal code center point, in miles (default) or km.",
+            "editor": "number",
+            "minimum": 1,
+            "maximum": 500
+        },
+        "unit": {
+            "title": "Radius Unit",
+            "type": "string",
+            "description": "Unit for the radius parameter.",
+            "editor": "select",
+            "enum": ["miles", "km"],
+            "enumTitles": ["Miles", "Kilometers"],
+            "default": "miles"
+        },
+        "classificationName": {
+            "sectionCaption": "Event Filters",
+            "sectionDescription": "Narrow results by event type, date range, and other criteria.",
+            "title": "Classification",
+            "type": "string",
+            "description": "Filter by event type/genre. Examples: 'Music', 'Sports', 'Arts & Theatre', 'Film', 'Comedy', 'Rock', 'Pop', 'Hip-Hop/Rap', 'NBA', 'NFL', 'MLB'.",
+            "editor": "textfield"
+        },
+        "startDateTime": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Filter events starting on or after this date/time. ISO 8601 format with timezone: 'YYYY-MM-DDTHH:mm:ssZ' (e.g. '2025-06-01T00:00:00Z').",
+            "editor": "textfield"
+        },
+        "endDateTime": {
+            "title": "End Date",
+            "type": "string",
+            "description": "Filter events starting on or before this date/time. ISO 8601 format with timezone: 'YYYY-MM-DDTHH:mm:ssZ' (e.g. '2025-12-31T23:59:59Z').",
+            "editor": "textfield"
+        },
+        "sort": {
+            "title": "Sort By",
+            "type": "string",
+            "description": "Sort results by the given field and order.",
+            "editor": "select",
+            "enum": ["relevance,desc", "date,asc", "date,desc", "name,asc", "name,desc", "distance,asc"],
+            "enumTitles": ["Relevance", "Date (soonest first)", "Date (latest first)", "Name (A-Z)", "Name (Z-A)", "Distance (nearest first)"],
+            "default": "relevance,desc"
+        },
+        "source": {
+            "title": "Source",
+            "type": "string",
+            "description": "Filter by ticket source platform.",
+            "editor": "select",
+            "enum": ["", "ticketmaster", "universe", "frontgate", "tmr"],
+            "enumTitles": ["All sources", "Ticketmaster", "Universe", "Frontgate", "Ticketmaster Resale"],
+            "default": ""
+        },
+        "includeFamily": {
+            "title": "Family-friendly only",
+            "type": "string",
+            "description": "Filter for family-friendly events.",
+            "editor": "select",
+            "enum": ["", "yes", "no"],
+            "enumTitles": ["No filter", "Family-friendly only", "Exclude family events"],
+            "default": ""
+        },
+        "maxResults": {
+            "sectionCaption": "Output Settings",
+            "sectionDescription": "Control how many results are returned.",
+            "title": "Max Results",
+            "type": "integer",
+            "description": "Maximum number of events to return (1-1000). Free users are limited to 25 per run. Note: Ticketmaster API limits deep paging to ~1000 results per search.",
+            "editor": "number",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 1000
+        },
+        "requestIntervalSecs": {
+            "sectionCaption": "Advanced Settings",
+            "sectionDescription": "Control rate limiting for the Ticketmaster API.",
+            "title": "Request Interval (seconds)",
+            "type": "number",
+            "description": "Minimum seconds between API requests. Ticketmaster allows 5 requests/second. Default is conservative to avoid hitting rate limits.",
+            "editor": "number",
+            "default": 0.5,
+            "minimum": 0.2,
+            "maximum": 5.0
+        }
+    },
+    "required": ["apiKey"],
+    "additionalProperties": false
+}
