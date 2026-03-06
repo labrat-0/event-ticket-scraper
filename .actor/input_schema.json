@@ -143,6 +143,7 @@
             "description": "Maximum number of events to return (1-1000). Free users are limited to 25 per run. Note: Ticketmaster API limits deep paging to ~1000 results per search.",
             "editor": "number",
             "default": 100,
+            "prefill": 10,
             "minimum": 1,
             "maximum": 1000
         },
@@ -158,6 +159,6 @@
             "maximum": 5.0
         }
     },
-    "required": ["apiKey"],
+    "required": [],
     "additionalProperties": false
 }
